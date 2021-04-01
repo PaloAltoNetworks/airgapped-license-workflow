@@ -35,4 +35,4 @@ snippets:
       - name: hostname
         capture_value: /system/hostname/text()
       - name: serial_number
-        capture_value: /system/serial/text()
+        capture_variable: /system/serial/text()
