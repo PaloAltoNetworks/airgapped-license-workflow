@@ -34,7 +34,7 @@ variables:
   - name: serial_number_var
     description: Serial Number of VM
     default: unknown
-    type-hint: hidden
+    type_hint: hidden
 
 snippets:
   # get existing device values for licensing
