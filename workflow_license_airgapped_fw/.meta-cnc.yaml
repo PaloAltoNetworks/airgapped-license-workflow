@@ -27,14 +27,19 @@ variables:
     description: Auth Code
     default: SOMECODEHERE
     type_hint: text
-
+  - name: support_api_key
+    description: Support Portal API Key
+    default: SOMECODEHERE
+    type_hint: text
 
 snippets:
   # get existing device values for licensing
   - name: gather_vm_info
 
   # reach out to license API to gather license files
-  #- name: fetch_license_from_api
+  - name: register_vm_support_api
+    when: "serial_number is 'unknown'"
 
   # push the license files to the NGFW for licensing
   #- name: push_license_files_to_fw
+  #  when: "serial_number is 'unknown'"

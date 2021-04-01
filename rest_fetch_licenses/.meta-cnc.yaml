@@ -1,0 +1,35 @@
+name: register_vm_support_api
+
+label: Register VM to support portal API
+
+description: |
+  Registers a VM to the support portal
+
+type: rest
+
+labels:
+  collection: lib
+
+variables:
+  - name: auth_code
+    description: Auth Code
+    default: SOMECODEHERE
+    type_hint: hidden
+  - name: support_api_key
+    description: Support Portal API Key
+    default: SOMECODEHERE
+    type_hint: hidden
+
+snippets:
+  - name: register_vm
+    path: https://api.paloaltonetworks.com/api/license/activate
+    operation: post
+    payload: project_payload.j2
+    headers:
+      apiKey: '{{ support_api_key }}'
+      user-agent: 'PANW-Lic-API/0.1.0'
+      Content-Type: application/json
+    output_type: json
+    outputs:
+      - name: full_output_as_json
+        capture_object: .
