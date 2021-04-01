@@ -35,4 +35,6 @@ snippets:
       - name: hostname
         capture_value: /system/hostname/text()
       - name: serial_number
-        capture_variable: /system/serial/text()
+        capture_value: /system/serial/text()
+      - name: serial_number_var
+        capture_variable: '{{ serial_number }}'

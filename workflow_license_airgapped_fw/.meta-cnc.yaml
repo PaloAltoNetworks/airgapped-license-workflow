@@ -28,7 +28,7 @@ variables:
     default: SOMECODEHERE
     type_hint: text
   - name: support_api_key
-    description: Support Portal API Key
+    description: Support Portal Licensing API Key
     default: SOMECODEHERE
     type_hint: text
 
@@ -38,7 +38,7 @@ snippets:
 
   # reach out to license API to gather license files
   - name: register_vm_support_api
-    when: "serial_number is 'unknown'"
+    when: "serial_number_var is 'unknown'"
 
   # push the license files to the NGFW for licensing
   #- name: push_license_files_to_fw
