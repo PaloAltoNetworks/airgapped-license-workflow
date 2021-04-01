@@ -27,9 +27,10 @@ snippets:
     payload: project_payload.j2
     headers:
       apiKey: '{{ support_api_key }}'
-      user-agent: 'PANW-Lic-API/0.1.0'
-      Content-Type: application/json
-    output_type: json
+      Content-Type: application/x-www-form-urlencoded
+    output_type: xml
     outputs:
       - name: full_output_as_json
         capture_object: .
+      - name: full_license_list
+        capture_list: .//@value
