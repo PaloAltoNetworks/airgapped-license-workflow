@@ -28,7 +28,7 @@ snippets:
     headers:
       apiKey: '{{ support_api_key }}'
       Content-Type: application/x-www-form-urlencoded
-    output_type: xml
+    output_type: json
     outputs:
       - name: full_output_as_json
         capture_object: .
