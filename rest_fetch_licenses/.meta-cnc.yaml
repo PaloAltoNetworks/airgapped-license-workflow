@@ -32,5 +32,3 @@ snippets:
     outputs:
       - name: full_output_as_json
         capture_object: .
-      - name: full_license_list
-        capture_list: .//@value
