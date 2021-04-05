@@ -28,15 +28,16 @@ snippets:
   - name: format_cli_command
     cmd: parse
     variable: key_list
+    output_type: text
     outputs:
       - name: push_command
         capture_variable: |-
-          {%- set command = "request license install" %}
+          {%- set command = 'request license install' %}
           {%- for key in key_list %}
             {%- command = command ~ key ~ %}
           {%- endfor %}
           {{ command }}
 
-  - name: get_system_info
+  - name: push_command_to_fw
     cmd: cli
     cmd_str: {{ push_command }}
