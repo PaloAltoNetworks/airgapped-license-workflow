@@ -12,12 +12,12 @@ labels:
 
 variables:
   - name: auth_code
-    description: Auth Code
-    default: SOMECODEHERE
     type_hint: hidden
   - name: support_api_key
-    description: Support Portal API Key
-    default: SOMECODEHERE
+    type_hint: hidden
+  - name: uuid
+    type_hint: hidden
+  - name: cpuid
     type_hint: hidden
 
 snippets:

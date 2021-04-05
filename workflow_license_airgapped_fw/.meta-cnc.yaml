@@ -31,9 +31,7 @@ variables:
     description: Support Portal Licensing API Key
     default: SOMECODEHERE
     type_hint: text
-  - name: serial_number_var
-    description: Serial Number of VM
-    default: unknown
+  - name: serial_number
     type_hint: hidden
 
 snippets:
@@ -42,7 +40,7 @@ snippets:
 
   # reach out to license API to gather license files
   - name: register_vm_support_api
-    when: serial_number_var is "unknown"
+    when: serial_number == "unknown"
 
   # push the license files to the NGFW for licensing
   #- name: push_license_files_to_fw
