@@ -32,5 +32,7 @@ snippets:
     outputs:
       - name: full_output_as_json
         capture_object: .
-      - name: key_list
+      - name: key_pattern
         capture_pattern: $..keyField
+      - name: key_object
+        capture_object: $..keyField
