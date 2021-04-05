@@ -43,5 +43,5 @@ snippets:
     when: serial_number == "unknown"
 
   # push the license files to the NGFW for licensing
-  #- name: push_license_files_to_fw
-  #  when: "serial_number is 'unknown'"
+  - name: push_license_files_to_fw
+    when: serial_number == "unknown"
