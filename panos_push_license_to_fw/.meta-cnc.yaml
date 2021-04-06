@@ -25,14 +25,13 @@ variables:
     type_hint: hidden
 
 snippets:
-  - name: save_one_key
-    cmd: parse
-    variable: key_list
-    outputs:
-      - name: key_command
-        capture_variable: |-
-          {% autoescape false %}bWIrUcaKO2uJ9gJBizHcUWfvZRVgcPYtIuzD8ihcwAS0e84hYd8Z0Jn9YbLoCam2\n3OHGR6rKLZQag81pRKNbASLKc0RrNDwSkwwYOijaZtMyrIvRuLJJpLDBtDzCDtxI\n4e4qqQ5Uz9e+U/z/e7eAiPjALvOAvgZBw11WS1PrHw3KeQ1NxVZrXAeFH3EXiAMP\noPoLEowOrYNE+9+/uV1bi/Kpb8XJ/Iifvi7Xn0KKxDv0d+EGprB6RYYx5xxSVbud\nS2KKT19w+L2O7FumKJULy++fFRVSMrDX3opVS5oXB6vx2jDVcvbx62QuUO553maS\nxNIU1dN8KriXAD10zyaJvA==\n{% endautoescape %}
-
+#  - name: save_one_key
+#    cmd: parse
+#    variable: key_list
+#    outputs:
+#      - name: key_command
+#        capture_variable: |-
+#
   - name: push_command_to_fw
     cmd: op
-    cmd_str: <request><license><install>{{ key_command }}</install></license></request>
+    cmd_str: <request><license><install>{% autoescape false %}bWIrUcaKO2uJ9gJBizHcUWfvZRVgcPYtIuzD8ihcwAS0e84hYd8Z0Jn9YbLoCam2\n3OHGR6rKLZQag81pRKNbASLKc0RrNDwSkwwYOijaZtMyrIvRuLJJpLDBtDzCDtxI\n4e4qqQ5Uz9e+U/z/e7eAiPjALvOAvgZBw11WS1PrHw3KeQ1NxVZrXAeFH3EXiAMP\noPoLEowOrYNE+9+/uV1bi/Kpb8XJ/Iifvi7Xn0KKxDv0d+EGprB6RYYx5xxSVbud\nS2KKT19w+L2O7FumKJULy++fFRVSMrDX3opVS5oXB6vx2jDVcvbx62QuUO553maS\nxNIU1dN8KriXAD10zyaJvA==\n{% endautoescape %}</install></license></request>
