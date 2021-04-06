@@ -35,4 +35,4 @@ snippets:
 
   - name: push_command_to_fw
     cmd: op
-    cmd_str: <request><license><install></install>{% autoescape false %}{{ key_list|replace('\n', '\r\n') }}{% endautoescape %}</license></request>
+    cmd_str: <request><license><install>{% autoescape false %}{{ key_list|replace('\n', '\r\n') }}{% endautoescape %}</install></license></request>
