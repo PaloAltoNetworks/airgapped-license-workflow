@@ -25,7 +25,14 @@ variables:
     type_hint: hidden
 
 snippets:
-  - name: push_command_to_fw
-    cmd: op
-    cmd_str: <request><license><install>{{ loop|replace("\\n", "\n") }}</install></license></request>
-    loop: key_list
+  - name: save_variable
+    cmd: parse
+    variable: key_list
+    outputs:
+      - name: key_one
+        capture_variable: {{ key_list[0] }}
+
+#  - name: push_command_to_fw
+#    cmd: op
+#    cmd_str: <request><license><install>{{ loop|replace("\\n", '\n') }}</install></license></request>
+#    loop: key_list
