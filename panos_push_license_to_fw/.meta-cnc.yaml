@@ -26,6 +26,6 @@ variables:
 
 snippets:
   - name: push_command_to_fw
-    cmd: cli
-    cmd_str: request license install {{ loop }}
+    cmd: op
+    cmd_str: <request><license><install>{{ loop }}</install></license></request>
     loop: key_list
