@@ -26,13 +26,13 @@ variables:
     type_hint: text
 
 snippets:
-  - name: save_one_key
-    cmd: parse
-    variable: key_list
-    outputs:
-      - name: key_command
-        capture_variable: {% autoescape false %}{{ key_list|replace('\n', '\r\n') }}{% endautoescape %}
+#  - name: save_one_key
+#    cmd: parse
+#    variable: key_list
+#    outputs:
+#      - name: key_command
+#        capture_variable: {% autoescape false %}{{ key_list|replace('\n', '\r\n') }}{% endautoescape %}
 
   - name: push_command_to_fw
     cmd: op
-    cmd_str: <request><license><install>{{ key_command }}</install></license></request>
+    cmd_str: <request><license><install></install>{% autoescape false %}{{ key_list|replace('\n', '\r\n') }}{% endautoescape %}</license></request>
