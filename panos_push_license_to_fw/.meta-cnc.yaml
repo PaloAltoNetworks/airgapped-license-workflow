@@ -1,4 +1,4 @@
-name: push_license_key
+name: push_license_files_to_fw
 label: Push License Key to FW
 description: |
     Push license keys to NGFW
@@ -6,7 +6,7 @@ description: |
 type: panos
 
 labels:
-    collection: lib
+  collection: lib
 
 variables:
   - name: TARGET_IP
@@ -25,17 +25,19 @@ variables:
     type_hint: hidden
 
 snippets:
-#  - name: format_cli_command
-#    cmd: parse
-#    variable: key_list
-#    outputs:
-#      - name: push_command
-#        capture_variable: |-
-#          {%- set command = 'request license install' %}
-#          {%- for key in key_list %}
-#            {%- command = command ~ key ~ %}
-#          {%- endfor %}
-#          {{ command }}
+  - name: format_cli_command
+    cmd: parse
+    variable: key_list
+    outputs:
+      - name: push_command
+        capture_variable: |-
+          {%- set command = 'request license install' %}
+          {%- for key in key_list %}
+            {%- command = command ~ key ~ %}
+          {%- endfor %}
+          {{ command }}
+#      - name: alt_push_command
+#        capture_variable: 'request license install {{ key_list|join(",") }}'
 
   - name: push_command_to_fw
     cmd: cli
