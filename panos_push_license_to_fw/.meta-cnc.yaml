@@ -25,13 +25,7 @@ variables:
     type_hint: hidden
 
 snippets:
-  - name: format_cli_command
-    cmd: parse
-    variable: key_list
-    outputs:
-      - name: push_command
-        capture_variable: 'request license install {{ key_list|join(" ") }}'
-
   - name: push_command_to_fw
     cmd: cli
-    cmd_str: request license install {{ push_command }}
+    cmd_str: request license install {{ loop }}
+    loop: key_list
