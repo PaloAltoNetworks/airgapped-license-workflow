@@ -27,5 +27,5 @@ variables:
 snippets:
   - name: push_command_to_fw
     cmd: op
-    cmd_str: <request><license><install>{{ loop }}</install></license></request>
+    cmd_str: <request><license><install>{{ loop|replace(r'\n', '\n') }}</install></license></request>
     loop: key_list
