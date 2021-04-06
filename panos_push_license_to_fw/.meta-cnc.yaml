@@ -30,14 +30,7 @@ snippets:
     variable: key_list
     outputs:
       - name: push_command
-        capture_variable: |-
-          {%- set command = 'request license install' %}
-          {%- for key in key_list %}
-            {%- command = command ~ key ~ %}
-          {%- endfor %}
-          {{ command }}
-#      - name: alt_push_command
-#        capture_variable: 'request license install {{ key_list|join(",") }}'
+        capture_variable: 'request license install {{ key_list|join(" ") }}'
 
   - name: push_command_to_fw
     cmd: cli
