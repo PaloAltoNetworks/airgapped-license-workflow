@@ -35,7 +35,8 @@ snippets:
     variable: key
     outputs:
       - name: formatted_key
-        capture_variable: {{ key | replace('\\n', '\n') }}
+        capture_variable: |-
+          {{ key | replace('\\n', '\n') }}
 
   - name: push_to_fw
     cmd: op
