@@ -23,7 +23,7 @@ variables:
     type_hint: hidden
   - name: key_list
     type_hint: hidden
--   name: key
+  - name: key
     description: key
     type_hint: text
     default: fs6U28hkqfSdsLE8rYa2MLh66e23McCOBTI8olVYBl8X1b45vJeObuP2dKzmoOAc\nOVlUIBxGr8M3CWzyYkddltx4WhzMJybmw23A6VzlEqTroIZIDHXVIFJ09HHUABqe\nYv7exsRK+Nj7ubpptrlcE/c85JTmnXu/3KfHgXKM08R7v2OMSsX8TxQdoLFnwRlx\nkCl0J5cp5XlGkJZ4dKeorOzFlbQ6BnvtkUXWn/zc0ngGwytNkyvXyJjW8WmDpm4I\nNz2QuYCROGXaWC+2Nl4tI9U5JUf/hQa3pVhwZ2J8DFXsoloGz+mbpnIaQjxrYCsw\njSitkbByNNRNLRxOReAwsw==\n
