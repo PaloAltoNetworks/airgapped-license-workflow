@@ -37,13 +37,14 @@ snippets:
       - name: formatted_key
         capture_variable: |-
           {{ key | replace('\\n', '\n') }}
-      - name: formatted_key_list
-        capture_variable: |-
-          {{ key | split('\n') }}
+      - name: formatted_key_list |-
+          {%- for line in key.split('\\n') %}
+          {{ line }}
+          {%- endfor -%}
 
   - name: push_to_fw
     cmd: op
-    cmd_str: <request><license><install>{{ formatted_key }}</install></license></request>
+    cmd_str: <request><license><install>{{ formatted_key_list }}</install></license></request>
 
 #  - name: push_command_to_fw
 #    cmd: op
