@@ -39,17 +39,10 @@ snippets:
           {{ key | replace('\\n', '\n') }}
       - name: formatted_key_list
         capture_variable: |-
-          <request><license><install>
           {%- for line in key.split('\\n') %}
           {{ line }}
           {%- endfor -%}
-          </install></license></request>
 
   - name: push_to_fw
     cmd: op
-    cmd_str: {{ formatted_key_list }}
-
-#  - name: push_command_to_fw
-#    cmd: op
-#    cmd_str: <request><license><install>{{ loop | replace('\n', '') -}}</install></license></request>
-#    loop: key_list
+    cmd_str: <request><license><install>{{ formatted_key_list }}</install></license></request>
