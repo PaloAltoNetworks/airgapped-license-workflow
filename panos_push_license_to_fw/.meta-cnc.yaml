@@ -44,6 +44,13 @@ snippets:
           {{ line }}
           {%- endfor -%}
 
-  - name: push_to_fw
-    cmd: op
-    cmd_str: <request><license><install>{{ key | replace("\\n", "\n") }}</install></license></request>
+#  - name: push_to_fw
+#    cmd: op
+#    cmd_str: <request><license><install>{{ formatted_key_list }}</install></license></request>
+  - name: send_license_request
+    cmd: cli
+    cmd_str: request license install
+
+  - name: send_license
+    cmd: cli
+    cmd_str: {{ key }}
