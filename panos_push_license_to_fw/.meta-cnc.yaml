@@ -22,6 +22,7 @@ variables:
     default: admin
     type_hint: hidden
   - name: key_list
+    description: key_list
     type_hint: hidden
   - name: key
     description: key
