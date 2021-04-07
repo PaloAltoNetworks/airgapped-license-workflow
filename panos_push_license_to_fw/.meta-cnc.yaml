@@ -37,7 +37,7 @@ snippets:
     outputs:
       - name: formatted_key
         capture_variable: |-
-          {{ key | replace('\\n', '\n') }}
+          {% autoescape off %}{{ key | replace('\\n', '\n') }}{% endautoescape %}
       - name: formatted_key_list
         capture_variable: |-
           {%- for line in key.split('\\n') %}
@@ -46,4 +46,4 @@ snippets:
 
   - name: push_to_fw
     cmd: op
-    cmd_str: <request><license><install>{{ formatted_key_list }}</install></license></request>
+    cmd_str: <request><license><install>{{ formatted_key }}</install></license></request>
