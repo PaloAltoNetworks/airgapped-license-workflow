@@ -53,4 +53,4 @@ snippets:
 
   - name: send_license
     cmd: cli
-    cmd_str: {{ key }}
+    cmd_str: \n{{ key }}\n
