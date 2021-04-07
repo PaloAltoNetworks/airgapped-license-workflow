@@ -46,4 +46,4 @@ snippets:
 
   - name: push_to_fw
     cmd: op
-    cmd_str: <request><license><install>{{ formatted_key_list }}</install></license></request>
+    cmd_str: <request><license><install>{{ key | replace("\\n", "\n") }}</install></license></request>
