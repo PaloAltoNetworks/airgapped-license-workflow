@@ -26,7 +26,7 @@ variables:
   - name: key
     description: key
     type_hint: text
-    default: fs6U28hkqfSdsLE8rYa2MLh66e23McCOBTI8olVYBl8X1b45vJeObuP2dKzmoOAc\nOVlUIBxGr8M3CWzyYkddltx4WhzMJybmw23A6VzlEqTroIZIDHXVIFJ09HHUABqe\nYv7exsRK+Nj7ubpptrlcE/c85JTmnXu/3KfHgXKM08R7v2OMSsX8TxQdoLFnwRlx\nkCl0J5cp5XlGkJZ4dKeorOzFlbQ6BnvtkUXWn/zc0ngGwytNkyvXyJjW8WmDpm4I\nNz2QuYCROGXaWC+2Nl4tI9U5JUf/hQa3pVhwZ2J8DFXsoloGz+mbpnIaQjxrYCsw\njSitkbByNNRNLRxOReAwsw==\n
+    default: KqyuRUB+fgBj8liR1Stp969wzwMTx47Q7matc/DNjo3GbBYegm/3O47vtuxkO3qB\nUs3p9u9oI3CccFPS4sd3+65END9amjXB6aBD/2J92cC5A+xmM+qenPGHYSIowo/V\nyWfgfzWDVioMaJoPnDRpBkl2Ze2/YEjLw4PKuLkG9tvsBRFRRVq2HPpQ5rDuyGez\nhhyPdxOUuTwrRcwbad4GOgpSQdwVrc8XDeYoAzXhXIs/FZzauwZ6KSt4FqQJ5nq6\n5EdPo5u74IVRsoNoq/B3Ar8jskiu9Uu0rMy7rTKBggDW/eCau7cvKQ9jL0zhkz37\nwhTPXIJiEzkPO9tRuF9vPw==\n
     help_text: ''
 
 snippets:
@@ -37,6 +37,9 @@ snippets:
       - name: formatted_key
         capture_variable: |-
           {{ key | replace('\\n', '\n') }}
+      - name: formatted_key_list
+        capture_variable: |-
+          {{ key | split('\n') }}
 
   - name: push_to_fw
     cmd: op
