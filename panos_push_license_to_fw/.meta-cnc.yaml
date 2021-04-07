@@ -37,7 +37,8 @@ snippets:
       - name: formatted_key
         capture_variable: |-
           {{ key | replace('\\n', '\n') }}
-      - name: formatted_key_list |-
+      - name: formatted_key_list
+        capture_variable: |-
           {%- for line in key.split('\\n') %}
           {{ line }}
           {%- endfor -%}
