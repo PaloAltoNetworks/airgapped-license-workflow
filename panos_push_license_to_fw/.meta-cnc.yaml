@@ -31,19 +31,19 @@ variables:
     help_text: ''
 
 snippets:
-  - name: format_key
-    cmd: parse
-    variable: key
-    outputs:
-      - name: formatted_key
-        capture_variable: |-
-          {% autoescape off %}{{ key | replace('\\n', '\n') }}{% endautoescape %}
-      - name: formatted_key_list
-        capture_variable: |-
-          {%- for line in key.split('\\n') %}
-          {{ line }}
-          {%- endfor -%}
+#  - name: format_key
+#    cmd: parse
+#    variable: key
+#    outputs:
+#      - name: formatted_key
+#        capture_variable: |-
+#          {% autoescape off %}{{ key | replace('\\n', '\n') }}{% endautoescape %}
+#      - name: formatted_key_list
+#        capture_variable: |-
+#          {%- for line in key.split('\\n') %}
+#          {{ line }}
+#          {%- endfor -%}
 
   - name: push_to_fw
     cmd: op
-    cmd_str: <request><license><install>{{ formatted_key }}</install></license></request>
+    cmd_str: <request><license><install>{{ key | replace('\\n', '\n') }}</install></license></request>
