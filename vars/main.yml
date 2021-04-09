@@ -1,0 +1,8 @@
+# Set your authcode here to ensure the FW is properly licensed
+auth_code: 'SOMECODEHERE'
+
+# Set your Support Portal Licensing API Key here to API access
+api_key: 'SOMECODEHERE'
+
+# Set the firewall's serial number if you need to retrieve previously activated licenses
+serial_num: 'unknown'

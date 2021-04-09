@@ -1,0 +1,13 @@
+---
+
+firewalls:
+  hosts:
+    test_firewall_1:
+      ansible_host: 10.10.10.10
+      ansible_user: admin
+      ansible_password: admin
+  vars:
+    ansible_network_os: mrichardson03.panos.panos
+    ansible_connection: httpapi
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False

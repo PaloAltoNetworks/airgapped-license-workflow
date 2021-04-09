@@ -1,0 +1,81 @@
+---
+- hosts: firewalls
+
+  vars:
+    auth_code: '{{ auth_code }}'
+    api_key: '{{ api_key }}'
+    serial_num: '{{ serial_num }}'
+
+  collections:
+    - mrichardson03.panos
+
+  tasks:
+    - name: Include User Variables
+      include_vars: vars/main.yml
+
+
+    - name: View System Info
+      panos_op:
+        cmd: 'show system info'
+      register: system_info_response
+
+
+    - name: Set JSON System Info
+      set_fact:
+        system_info: "{{ system_info_response.stdout | from_json  }}"
+
+
+    - name: Grab System Info
+      set_fact:
+        vm_uuid:  "{{ system_info.response.result.system['vm-uuid'] }}"
+        vm_cpuid:  "{{  system_info.response.result.system['vm-cpuid'] }}"
+        vm_serial: "{{ system_info.response.result.system['serial'] }}"
+
+
+#    - name: Assert VM isn't Licensed
+#      assert:
+#          that:
+#            - serial_num == "unknown"
+#          fail_msg: "VM is licensed and contains a serial number."
+
+
+    - name: Activate VM Licenses with API
+      uri:
+        url: https://api.paloaltonetworks.com/api/license/activate
+        method: POST
+        headers:
+          apiKey: '{{ api_key }}'
+        body_format: form-urlencoded
+        body:
+          cpuid: '{{ vm_cpuid }}'
+          uuid: '{{ vm_uuid }}'
+          authCode: '{{ auth_code }}'
+      register: registration
+      when: (vm_serial == "unknown") and (serial_num == "unknown")
+
+
+    - name: Retrieve Previously Activated Licenses with API
+      uri:
+        url: https://api.paloaltonetworks.com/api/license/activate
+        method: POST
+        headers:
+          apiKey: '{{ api_key }}'
+        body_format: form-urlencoded
+        body:
+          serialNumber: '{{ serial_num }}'
+      register: registration
+      when: serial_num != "unknown"
+
+
+    - name: Save API Response
+      set_fact:
+        key_list: "{{ registration.json }}"
+
+
+    - name: Push license keys to Firewall
+      panos_op:
+        cmd: '<request><license><install>{{ item.keyField }}</install></license></request>'
+        cmd_is_xml: true
+      loop: '{{ key_list }}'
+      loop_control:
+        pause: 5
