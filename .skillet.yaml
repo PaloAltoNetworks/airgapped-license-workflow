@@ -31,17 +31,17 @@ variables:
 
   - name: first_time_registration
     description: Is this the first time or initial license activation?
-    default:
+    default: 'Yes'
     type_hint: dropdown
     help_text: |
       If you did not save the license keys or had a network connection trouble
       during initial license activation, to retrieve the license(s) again for a
       firewall that you have previously activated, choose no.
     dd_list:
-      - key: yes
-        value: yes
-      - key: no
-        value: no
+      - key: 'Yes'
+        value: 'Yes'
+      - key: 'No'
+        value: 'No'
 
   - name: auth_code
     description: Auth Code
@@ -49,7 +49,7 @@ variables:
     type_hint: text
     toggle_hint:
       source: first_time_registration
-      value: 'yes'
+      value: 'Yes'
 
   - name: serial_num
     description: FW Serial Number
@@ -57,7 +57,7 @@ variables:
     type_hint: text
     toggle_hint:
       source: first_time_registration
-      value: 'no'
+      value: 'No'
 
 
 snippets:
