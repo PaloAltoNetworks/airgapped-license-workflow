@@ -58,7 +58,7 @@ snippets:
     image: registry.gitlab.com/panw-gse/as/panos_skillet_tools:dev
     async: True
     cmd: |
-      ansible-playbook license-airgap-firewall.yml
+      ansible-playbook -i inventory license-airgap-firewall.yml
       -e 'auth_code="{{ auth_code }}"'
       -e 'api_key="{{ api_key }}"'
       -e 'serial_num="{{ serial_num }}"'
