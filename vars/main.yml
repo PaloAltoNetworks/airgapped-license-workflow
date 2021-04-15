@@ -4,5 +4,9 @@ auth_code: 'SOMECODEHERE'
 # Set your Support Portal Licensing API Key here to API access
 api_key: 'SOMECODEHERE'
 
-# Set the firewall's serial number if you need to retrieve previously activated licenses
-serial_num: 'unknown'
+# If you did not save the license keys or had a network connection trouble
+# during initial license activation, you will most likely run into the error,
+# "Cannot apply a provisioning license feature to an already provisioned device"
+# and will need to retrieve the license(s) again. For this situation, set
+# first_time_registration to 'no'. If not, set the variable to 'yes'.
+first_time_registation: 'yes'

@@ -9,17 +9,17 @@ labels:
   collection: Deploy Tools
 
 variables:
-  - name: ip_address
+  - name: TARGET_IP
     description: Host IP Address
     default: 10.10.10.10
     type_hint: ip_address
 
-  - name: username
+  - name: TARGET_USERNAME
     description: Host Username
     default: admin
     type_hint: text
 
-  - name: password
+  - name: TARGET_PASSWORD
     description: Host Password
     default: admin
     type_hint: password
@@ -30,13 +30,14 @@ variables:
     type_hint: text
 
   - name: first_time_registration
-    description: Is this the first time or initial license activation?
+    description: Is this the initial license activation?
     default: 'Yes'
     type_hint: dropdown
     help_text: |
       If you did not save the license keys or had a network connection trouble
-      during initial license activation, to retrieve the license(s) again for a
-      firewall that you have previously activated, choose no.
+      during initial license activation, you will most likely run into the error,
+      "Cannot apply a provisioning license feature to an already provisioned device"
+      and will need to retrieve the license(s) again. For this, choose no.
     dd_list:
       - key: 'Yes'
         value: 'Yes'
@@ -51,21 +52,16 @@ variables:
       source: first_time_registration
       value: 'Yes'
 
-  - name: serial_num
-    description: FW Serial Number
-    default: unknown
-    type_hint: text
-    toggle_hint:
-      source: first_time_registration
-      value: 'No'
-
 
 snippets:
   - name: ansible_test
     image: registry.gitlab.com/panw-gse/as/panos_skillet_tools:dev
     async: True
     cmd: |
-      ansible-playbook -i 'panos,' license-airgap-firewall.yml
+      ansible-playbook license-airgap-firewall.yml
       -e 'auth_code="{{ auth_code }}"'
       -e 'api_key="{{ api_key }}"'
       -e 'serial_num="{{ serial_num }}"'
+      -e 'ansible_host="{{ TARGET_IP }}"'
+      -e 'ansible_user="{{ TARGET_USERNAME }}"'
+      -e 'ansible_password="{{ TARGET_PASSWORD }}"'

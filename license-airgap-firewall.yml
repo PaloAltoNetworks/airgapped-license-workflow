@@ -32,13 +32,6 @@
         vm_serial: "{{ system_info.response.result.system['serial'] }}"
 
 
-#    - name: Assert VM isn't Licensed
-#      assert:
-#          that:
-#            - serial_num == "unknown"
-#          fail_msg: "VM is licensed and contains a serial number."
-
-
     - name: Activate VM Licenses with API
       uri:
         url: https://api.paloaltonetworks.com/api/license/activate
@@ -51,7 +44,7 @@
           uuid: '{{ vm_uuid }}'
           authCode: '{{ auth_code }}'
       register: registration
-      when: (vm_serial == "unknown") and (serial_num == "unknown")
+      when: first_time_registration == "yes"
 
 
     - name: Retrieve Previously Activated Licenses with API
@@ -62,9 +55,10 @@
           apiKey: '{{ api_key }}'
         body_format: form-urlencoded
         body:
-          serialNumber: '{{ serial_num }}'
+          cpuid: '{{ vm_cpuid }}'
+          uuid: '{{ vm_uuid }}'
       register: registration
-      when: serial_num != "unknown"
+      when: first_time_registration == "no"
 
 
     - name: Save API Response
