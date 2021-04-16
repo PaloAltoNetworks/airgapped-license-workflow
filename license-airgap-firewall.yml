@@ -1,5 +1,7 @@
 ---
-- hosts: firewalls
+- hosts: fw
+  connection: local
+
 
   vars:
     auth_code: '{{ auth_code }}'
