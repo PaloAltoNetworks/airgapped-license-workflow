@@ -13,6 +13,12 @@
     - name: Include User Variables
       include_vars: vars/main.yml
 
+    - name: Debug some user input
+      debug:
+        msg: "{{ ansible_host }} and {{ ansible_user }} and {{ ansible_password }}"
+
+    - name: Check if device is ready
+      panos_check:
 
     - name: View System Info
       panos_op:
