@@ -17,7 +17,7 @@
 
     - name: Debug some user input
       debug:
-        msg: "{{ ansible_host }}, {{ ansible_user }}, {{ ansible_password }}, {{ api_key }}, {{ first_time_registration }} & {{ auth_code }} "
+        msg: "{{ ansible_host }} and {{ ansible_user }} and {{ ansible_password }}"
 
     - name: Check if device is ready
       panos_check:
