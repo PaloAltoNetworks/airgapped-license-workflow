@@ -62,6 +62,7 @@ snippets:
       -e 'auth_code="{{ auth_code }}"'
       -e 'api_key="{{ api_key }}"'
       -e 'serial_num="{{ serial_num }}"'
+      -e 'first_time_registration="{{ first_time_registration }}"'
       -e 'ansible_host="{{ TARGET_IP }}"'
       -e 'ansible_user="{{ TARGET_USERNAME }}"'
       -e 'ansible_password="{{ TARGET_PASSWORD }}"'
