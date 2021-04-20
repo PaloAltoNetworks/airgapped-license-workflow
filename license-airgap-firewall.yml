@@ -1,5 +1,7 @@
 ---
 - hosts: fw
+  connection: local
+  gather_facts: false
 
 
   vars:
@@ -11,6 +13,9 @@
     - mrichardson03.panos
 
   tasks:
+    - name: sleep indefinitely
+      shell: 'sleep 1200'
+
     - name: Include User Variables
       include_vars: vars/main.yml
 
