@@ -1,8 +1,6 @@
 ---
 - hosts: fw
   connection: local
-  gather_facts: false
-
 
   vars:
     auth_code: '{{ auth_code }}'
@@ -13,15 +11,8 @@
     - mrichardson03.panos
 
   tasks:
-    - name: sleep indefinitely
-      shell: 'sleep 1200'
-
     - name: Include User Variables
       include_vars: vars/main.yml
-
-    - name: Debug some user input
-      debug:
-        msg: "{{ ansible_host }} and {{ ansible_user }} and {{ ansible_password }}"
 
     - name: Check if device is ready
       panos_check:
