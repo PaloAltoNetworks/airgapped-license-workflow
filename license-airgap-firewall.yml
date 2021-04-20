@@ -1,6 +1,5 @@
 ---
 - hosts: fw
-  connection: local
 
 
   vars:
