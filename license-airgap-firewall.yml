@@ -46,8 +46,8 @@
           cpuid: '{{ vm_cpuid }}'
           uuid: '{{ vm_uuid }}'
           authCode: '{{ auth_code }}'
-      register: registration
-      when: first_time_registration == "yes"
+      register: reg
+      when: first_time == "yes"
 
 
     - name: Retrieve Previously Activated Licenses with API
@@ -60,14 +60,13 @@
         body:
           cpuid: '{{ vm_cpuid }}'
           uuid: '{{ vm_uuid }}'
-      register: registration
-      when: first_time_registration == "no"
+      register: rereg
+      when: first_time == "no"
 
 
     - name: Save API Response
       set_fact:
-        key_list: "{{ registration.json }}"
-
+        key_list: "{% if first_time=='yes' %}{{ reg.json }}{% else %}{{ rereg.json }}{% endif %}"
 
     - name: Push license keys to Firewall
       panos_op:
