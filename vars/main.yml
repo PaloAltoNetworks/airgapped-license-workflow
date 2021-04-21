@@ -9,4 +9,4 @@ api_key: 'SOMECODEHERE'
 # "Cannot apply a provisioning license feature to an already provisioned device"
 # and will need to retrieve the license(s) again. For this situation, set
 # first_time_registration to 'no'. If not, set the variable to 'yes'.
-first_time_registation: 'yes'
+first_time_registration: 'yes'
