@@ -1,0 +1,67 @@
+name: panos_license_airgapped_firewall
+label: License a Airgapped NGFW
+description: |
+  Workflow that registers a VM with the Licensing API and pushes
+  the license keys to the VM.
+type: docker
+
+labels:
+  collection: Deploy Tools
+
+variables:
+  - name: TARGET_IP
+    description: Host IP Address
+    default: 10.10.10.10
+    type_hint: ip_address
+
+  - name: TARGET_USERNAME
+    description: Host Username
+    default: admin
+    type_hint: text
+
+  - name: TARGET_PASSWORD
+    description: Host Password
+    default: admin
+    type_hint: password
+
+  - name: api_key
+    description: Support Portal Licensing API Key
+    default: SOMECODEHERE
+    type_hint: text
+
+  - name: first_time
+    description: Is this the initial license activation?
+    default: 'Yes'
+    type_hint: dropdown
+    help_text: |
+      If you did not save the license keys or had a network connection trouble
+      during initial license activation, you will most likely run into the error,
+      "Cannot apply a provisioning license feature to an already provisioned device"
+      and will need to retrieve the license(s) again. For this, choose no.
+    dd_list:
+      - key: 'Yes'
+        value: 'Yes'
+      - key: 'No'
+        value: 'No'
+
+  - name: auth_code
+    description: Auth Code
+    default: SOMECODEHERE
+    type_hint: text
+    toggle_hint:
+      source: first_time_registration
+      value: 'Yes'
+
+
+snippets:
+  - name: ansible_test
+    image: registry.gitlab.com/panw-gse/as/panos_skillet_tools:dev
+    async: True
+    cmd: |
+      ansible-playbook -i inventory license-airgap-firewall.yml
+      -e 'auth_code="{{ auth_code }}"'
+      -e 'api_key="{{ api_key }}"'
+      -e 'first_time="{{ first_time }}"'
+      -e 'ansible_host="{{ TARGET_IP }}"'
+      -e 'ansible_user="{{ TARGET_USERNAME }}"'
+      -e 'ansible_password="{{ TARGET_PASSWORD }}"'
