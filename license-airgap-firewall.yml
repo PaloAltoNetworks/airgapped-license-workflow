@@ -16,6 +16,10 @@
     - name: Include User Variables
       include_vars: vars/main.yml
 
+    - name: Debug Skillet input variables
+      debug:
+        msg: "auth_code: {{ auth_code }}; first time: {{ first_time }}; api_key: {{ api_key }}"
+
     - name: Check if device is ready
       panos_check:
 
@@ -48,6 +52,11 @@
       register: reg
       when: first_time == "yes"
 
+    - name: Debug First Time API Response
+      debug:
+        var: reg
+      when: first_time == "yes"
+
     - name: Retrieve Previously Activated Licenses with API
       uri:
         url: https://api.paloaltonetworks.com/api/license/activate
@@ -59,6 +68,11 @@
           cpuid: '{{ vm_cpuid }}'
           uuid: '{{ vm_uuid }}'
       register: rereg
+      when: first_time == "no"
+
+    - name: Debug Second Time API Response
+      debug:
+        var: rereg
       when: first_time == "no"
 
     - name: Save API Response

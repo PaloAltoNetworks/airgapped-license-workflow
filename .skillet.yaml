@@ -31,7 +31,7 @@ variables:
 
   - name: first_time
     description: Is this the initial license activation?
-    default: 'Yes'
+    default: 'yes'
     type_hint: dropdown
     help_text: |
       If you did not save the license keys or had a network connection trouble
@@ -39,18 +39,18 @@ variables:
       "Cannot apply a provisioning license feature to an already provisioned device"
       and will need to retrieve the license(s) again. For this, choose no.
     dd_list:
-      - key: 'Yes'
-        value: 'Yes'
-      - key: 'No'
-        value: 'No'
+      - key: 'yes'
+        value: 'yes'
+      - key: 'no'
+        value: 'no'
 
   - name: auth_code
     description: Auth Code
     default: SOMECODEHERE
     type_hint: text
     toggle_hint:
-      source: first_time_registration
-      value: 'Yes'
+      source: first_time
+      value: 'yes'
 
 
 snippets:
