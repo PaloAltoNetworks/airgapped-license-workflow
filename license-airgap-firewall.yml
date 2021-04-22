@@ -5,10 +5,12 @@
   vars:
     auth_code: '{{ auth_code }}'
     api_key: '{{ api_key }}'
-    serial_num: '{{ serial_num }}'
+    first_time: '{{ first_time }}'
+
 
   collections:
     - mrichardson03.panos
+
 
   tasks:
     - name: Include User Variables
@@ -22,18 +24,15 @@
         cmd: 'show system info'
       register: system_info_response
 
-
     - name: Set JSON System Info
       set_fact:
         system_info: "{{ system_info_response.stdout | from_json  }}"
-
 
     - name: Grab System Info
       set_fact:
         vm_uuid:  "{{ system_info.response.result.system['vm-uuid'] }}"
         vm_cpuid:  "{{  system_info.response.result.system['vm-cpuid'] }}"
         vm_serial: "{{ system_info.response.result.system['serial'] }}"
-
 
     - name: Activate VM Licenses with API
       uri:
@@ -49,7 +48,6 @@
       register: reg
       when: first_time == "yes"
 
-
     - name: Retrieve Previously Activated Licenses with API
       uri:
         url: https://api.paloaltonetworks.com/api/license/activate
@@ -63,15 +61,23 @@
       register: rereg
       when: first_time == "no"
 
-
     - name: Save API Response
       set_fact:
         key_list: "{% if first_time=='yes' %}{{ reg.json }}{% else %}{{ rereg.json }}{% endif %}"
 
-    - name: Push license keys to Firewall
-      panos_op:
-        cmd: '<request><license><install>{{ item.keyField }}</install></license></request>'
-        cmd_is_xml: true
-      loop: '{{ key_list }}'
-      loop_control:
-        pause: 5
+    - name:
+      block:
+        - name: Push license keys to Firewall
+          panos_op:
+            cmd: '<request><license><install>{{ item.keyField }}</install></license></request>'
+            cmd_is_xml: true
+          loop: '{{ key_list }}'
+          loop_control:
+            pause: 1
+      rescue:
+        - name: Pause for reboot check
+          pause:
+            seconds: 30
+
+        - name: Check if device is up and ready
+          panos_check:
