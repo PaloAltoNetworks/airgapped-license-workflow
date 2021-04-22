@@ -67,7 +67,7 @@
 
     - name:
       block:
-        - name: Push VM license keys to Firewall, will wait for reboot on failure
+        - name: Push PA-VM license key to Firewall, will wait for reboot on failure
           panos_op:
             cmd: '<request><license><install>{{ key_list[0].keyField }}</install></license></request>'
             cmd_is_xml: true

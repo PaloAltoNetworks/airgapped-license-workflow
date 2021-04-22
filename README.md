@@ -11,15 +11,16 @@ these steps:
 
     * Grab the CPUID and UUID from the NGFW
     * Activate the NGFW with the Licensing API 
-    * Push all received licensing keys to the NGFW
+    * Push the PA-VM license key and wait for a reboot
+    * Push all remaining received licensing keys to the NGFW
 
 ### Running the Playbook
 
-##### Install/Upgrade the PAN-OS Enhanced Ansible Collection
+#### Install/Upgrade the PAN-OS Enhanced Ansible Collection
 
 `ansible-galaxy collection install --force mrichardson03.panos`
 
-##### Edit your inventory file
+#### Edit your inventory file
 
 In the inventory file, you can set the NGFW's IP address (_ansible_host_), 
 username (_ansible_user_) and password (_ansible_password_).
@@ -28,7 +29,7 @@ username (_ansible_user_) and password (_ansible_password_).
 
 `vi inventory`
 
-##### Edit your vars file
+#### Edit your vars file
 
 In the `vars/main.yml` file, you can set:
    1. the pre-activated auth-code 
@@ -42,7 +43,17 @@ trouble during initial license activation, you may run into the error message:
 
 In this case, you will need to set the `first_time` as _no_. 
 
-##### Run the Playbook, passing along extra vars if necessary
+#### Run the Playbook, passing along extra vars if not previously set
 
-`ansible-playbook -i inventory license-airgap-firewall.yml -e 'ansible_host=10.10.10.10'
--e 'first_time=yes'`
+If you did not edit the variables and inventory files, you can use the `-e` command 
+line parameter to set extra variables. Run the following command to license your
+airgapped firewall:
+
+`ansible-playbook -i inventory license-airgap-firewall.yml -e 'first_time=yes'`
+
+> **Please Note**: 
+> 
+> During the first time registration of a VM, the *Push PA-VM license key to Firewall*
+> Ansible task **WILL FAIL** with the error `Remote end closed connection without response`
+> since the VM must reboot. This failure is an expected behavior, and the playbook will 
+> wait for the firewall to boot back up and will push remaining licenses to the VM. 
