@@ -18,6 +18,9 @@ these steps:
 
 #### Install/Upgrade the PAN-OS Enhanced Ansible Collection
 
+This playbook requires the `v1.2.0+ mrichardson03.panos` Ansible collection. Install 
+with this command:
+
 `ansible-galaxy collection install --force mrichardson03.panos`
 
 #### Edit your inventory file

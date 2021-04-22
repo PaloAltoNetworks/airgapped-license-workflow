@@ -20,19 +20,7 @@
       panos_check:
 
     - name: View System Info
-      panos_op:
-        cmd: 'show system info'
-      register: system_info_response
-
-    - name: Set JSON System Info
-      set_fact:
-        system_info: "{{ system_info_response.stdout | from_json  }}"
-
-    - name: Grab System Info
-      set_fact:
-        vm_uuid:  "{{ system_info.response.result.system['vm-uuid'] }}"
-        vm_cpuid:  "{{  system_info.response.result.system['vm-cpuid'] }}"
-        vm_serial: "{{ system_info.response.result.system['serial'] }}"
+      panos_facts:
 
     - name: Activate VM Licenses with API
       uri:
@@ -42,8 +30,8 @@
           apiKey: '{{ api_key }}'
         body_format: form-urlencoded
         body:
-          cpuid: '{{ vm_cpuid }}'
-          uuid: '{{ vm_uuid }}'
+          cpuid: '{{ ansible_net_vm_cpuid }}'
+          uuid: '{{ ansible_net_vm_uuid }}'
           authCode: '{{ auth_code }}'
       register: reg
       when: first_time == "yes"
@@ -56,8 +44,8 @@
           apiKey: '{{ api_key }}'
         body_format: form-urlencoded
         body:
-          cpuid: '{{ vm_cpuid }}'
-          uuid: '{{ vm_uuid }}'
+          cpuid: '{{ ansible_net_vm_cpuid }}'
+          uuid: '{{ ansible_net_vm_uuid }}'
       register: rereg
       when: first_time == "no"
 
