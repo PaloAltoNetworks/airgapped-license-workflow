@@ -67,14 +67,11 @@
 
     - name:
       block:
-        - name: Attempt to push license keys to Firewall, will retry upon failure
+        - name: Push VM license keys to Firewall, will wait for reboot on failure
           panos_op:
-            cmd: '<request><license><install>{{ item.keyField }}</install></license></request>'
+            cmd: '<request><license><install>{{ key_list[0].keyField }}</install></license></request>'
             cmd_is_xml: true
-          loop: '{{ key_list }}'
-          loop_control:
-            label: "{{ item.featureField }}"
-            pause: 1
+
       rescue:
         - name: Pause for reboot check
           pause:
@@ -83,11 +80,11 @@
         - name: Check if device is ready before retrying
           panos_check:
 
-        - name: Retry pushing license keys to Firewall
-          panos_op:
-            cmd: '<request><license><install>{{ item.keyField }}</install></license></request>'
-            cmd_is_xml: true
-          loop: '{{ key_list }}'
-          loop_control:
-            label: "{{ item.featureField }}"
-            pause: 1
+    - name: Push remaining license keys to Firewall
+      panos_op:
+        cmd: '<request><license><install>{{ item.keyField }}</install></license></request>'
+        cmd_is_xml: true
+      loop: '{{ key_list }}'
+      loop_control:
+        label: "{{ item.featureField }}"
+        pause: 1
