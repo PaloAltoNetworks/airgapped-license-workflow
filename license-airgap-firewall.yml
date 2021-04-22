@@ -21,6 +21,11 @@
 
     - name: View System Info
       panos_facts:
+      register: facts
+
+    - name: debug
+      debug:
+        var: facts
 
     - name: Activate VM Licenses with API
       uri:
