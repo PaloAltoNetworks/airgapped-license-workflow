@@ -36,7 +36,7 @@ username (_ansible_user_) and password (_ansible_password_).
 
 In the `vars/main.yml` file, you can set:
    1. the pre-activated auth-code 
-   2. your _Customer Support Portal > Assets > **Licensing API key**,_
+   2. your _Customer Support Portal > Assets > API Key Management > **Licensing API**,_
    3. the `first_time` registration (yes/no)
 
 If you did not save the license keys or had a network connection 

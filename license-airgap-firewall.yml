@@ -64,7 +64,7 @@
       rescue:
         - name: Pause for reboot check
           pause:
-            seconds: 30
+            seconds: 180
 
         - name: Check if device is ready before retrying
           panos_check:
